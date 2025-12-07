@@ -1,0 +1,107 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Nullable>disable</Nullable>
+    <Optimize>true</Optimize>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GameRoot>C:\Program Files (x86)\Steam\steamapps\common\VA Proxy Demo</GameRoot>
+    <Managed>$(GameRoot)\VA-Proxy_Data\Managed</Managed>
+    <BepInExCore>$(GameRoot)\BepInEx\core</BepInExCore>
+    <Plugins>$(GameRoot)\BepInEx\plugins</Plugins>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(Managed)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass" Condition="Exists('$(Managed)\Assembly-CSharp-firstpass.dll')">
+      <HintPath>$(Managed)\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>$(BepInExCore)\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BepInEx.Harmony" Condition="Exists('$(BepInExCore)\BepInEx.Harmony.dll')">
+      <HintPath>$(BepInExCore)\BepInEx.Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(BepInExCore)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(Managed)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(Managed)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>$(Managed)\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule" Condition="Exists('$(Managed)\UnityEngine.UIModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.UIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI" Condition="Exists('$(Managed)\UnityEngine.UI.dll')">
+      <HintPath>$(Managed)\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine" Condition="Exists('$(Managed)\UnityEngine.dll')">
+      <HintPath>$(Managed)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule" Condition="Exists('$(Managed)\UnityEngine.InputLegacyModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule" Condition="Exists('$(Managed)\UnityEngine.ImageConversionModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule" Condition="Exists('$(Managed)\UnityEngine.AssetBundleModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule" Condition="Exists('$(Managed)\UnityEngine.AnimationModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule" Condition="Exists('$(Managed)\UnityEngine.AudioModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.AudioModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule" Condition="Exists('$(Managed)\UnityEngine.TextRenderingModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule" Condition="Exists('$(Managed)\UnityEngine.XRModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.XRModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule" Condition="Exists('$(Managed)\UnityEngine.TerrainModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.TerrainModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule" Condition="Exists('$(Managed)\UnityEngine.ParticleSystemModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule" Condition="Exists('$(Managed)\UnityEngine.JSONSerializeModule.dll')">
+      <HintPath>$(Managed)\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <Target Name="CopyToPlugins" AfterTargets="Build">
+    <Message Text="Copying $(TargetDir)$(AssemblyName).dll to $(Plugins)" Importance="high" />
+    <MakeDir Directories="$(Plugins)" Condition="!Exists('$(Plugins)')" />
+    <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll" DestinationFolder="$(Plugins)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>
